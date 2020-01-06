@@ -1,0 +1,362 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css">
+        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <link rel="stylesheet" href="css/leaflet-measure.css">
+        <style>
+        html, body, #map {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+        </style>
+        <title></title>
+    </head>
+    <body>
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script>
+        <script src="js/multi-style-layer.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="js/leaflet-measure.js"></script>
+        <script src="data/Route_1.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script>
+	$(document).ready(function()
+	{
+		$.ajax({
+			type: "GET",
+			url: "https://api.findmespot.com/spot-main-web/consumer/rest-api/2.0/public/feed/0BBk2RhP8BxXzRbdRKenMK0rLB4zXNqY2/latest.xml"
+			dataType: "xml",
+			success: parseXml
+		});
+	});
+
+	</script>
+	<script>
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:18, minZoom:1
+        }).fitBounds([[44.04327876158709,-74.28963806649425],[44.395522258851976,-73.67930193350583]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
+        var measureControl = new L.Control.Measure({
+            position: 'topleft',
+            primaryLengthUnit: 'feet',
+            secondaryLengthUnit: 'miles',
+            primaryAreaUnit: 'sqfeet',
+            secondaryAreaUnit: 'sqmiles'
+        });
+        measureControl.addTo(map);
+        document.getElementsByClassName('leaflet-control-measure-toggle')[0]
+        .innerHTML = '';
+        document.getElementsByClassName('leaflet-control-measure-toggle')[0]
+        .className += ' fas fa-ruler';
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+        }
+        var layer_GoogleTerrainHybrid_0 = L.tileLayer('https://mt1.google.com/vt/lyrs=p&x={x}&y={y}&z={z}', {
+            opacity: 1.0,
+            attribution: '',
+            minZoom: 1,
+            maxZoom: 18,
+            minNativeZoom: 0,
+            maxNativeZoom: 19
+        });
+        layer_GoogleTerrainHybrid_0;
+        map.addLayer(layer_GoogleTerrainHybrid_0);
+        function pop_Route_1(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['map'] !== null ? Autolinker.link(feature.properties['map'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Route'] !== null ? Autolinker.link(feature.properties['Route'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Route_1_0(feature) {
+            switch(String(feature.properties['Route'])) {
+                case 'Day 1 - 23 Miles':
+                    return {
+                pane: 'pane_Route_1',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.8)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case 'Day 2 - 25 miles':
+                    return {
+                pane: 'pane_Route_1',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.8)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case 'Day 3 - 24 miles':
+                    return {
+                pane: 'pane_Route_1',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.8)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case 'Day 4 - 14 miles':
+                    return {
+                pane: 'pane_Route_1',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.8)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case 'Day 5 - 19 miles':
+                    return {
+                pane: 'pane_Route_1',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.8)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case 'Day 6 - 20 miles':
+                    return {
+                pane: 'pane_Route_1',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.8)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case 'Day 7 - 25 miles':
+                    return {
+                pane: 'pane_Route_1',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.8)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case 'Day 8 - 20 miles':
+                    return {
+                pane: 'pane_Route_1',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.8)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                default:
+                    return {
+                pane: 'pane_Route_1',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.8)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        function style_Route_1_1(feature) {
+            switch(String(feature.properties['Route'])) {
+                case 'Day 1 - 23 Miles':
+                    return {
+                pane: 'pane_Route_1',
+                opacity: 1,
+                color: 'rgba(39,86,255,0.8)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 2.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case 'Day 2 - 25 miles':
+                    return {
+                pane: 'pane_Route_1',
+                opacity: 1,
+                color: 'rgba(7,239,255,0.8)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 2.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case 'Day 3 - 24 miles':
+                    return {
+                pane: 'pane_Route_1',
+                opacity: 1,
+                color: 'rgba(9,244,60,0.8)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 2.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case 'Day 4 - 14 miles':
+                    return {
+                pane: 'pane_Route_1',
+                opacity: 1,
+                color: 'rgba(245,242,30,0.8)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 2.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case 'Day 5 - 19 miles':
+                    return {
+                pane: 'pane_Route_1',
+                opacity: 1,
+                color: 'rgba(253,146,31,0.8)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 2.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case 'Day 6 - 20 miles':
+                    return {
+                pane: 'pane_Route_1',
+                opacity: 1,
+                color: 'rgba(248,14,14,0.8)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 2.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case 'Day 7 - 25 miles':
+                    return {
+                pane: 'pane_Route_1',
+                opacity: 1,
+                color: 'rgba(255,29,116,0.8)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 2.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case 'Day 8 - 20 miles':
+                    return {
+                pane: 'pane_Route_1',
+                opacity: 1,
+                color: 'rgba(255,24,205,0.8)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 2.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                default:
+                    return {
+                pane: 'pane_Route_1',
+                opacity: 1,
+                color: 'rgba(240,249,33,0.8)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 2.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_Route_1');
+        map.getPane('pane_Route_1').style.zIndex = 401;
+        map.getPane('pane_Route_1').style['mix-blend-mode'] = 'normal';
+        var layer_Route_1 = new L.geoJson.multiStyle(json_Route_1, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Route_1',
+            layerName: 'layer_Route_1',
+            pane: 'pane_Route_1',
+            onEachFeature: pop_Route_1,
+            styles: [style_Route_1_0,style_Route_1_1,]
+        });
+        bounds_group.addLayer(layer_Route_1);
+        map.addLayer(layer_Route_1);
+        setBounds();
+        resetLabels([layer_Route_1]);
+        map.on("zoomend", function(){
+            resetLabels([layer_Route_1]);
+        });
+        map.on("layeradd", function(){
+            resetLabels([layer_Route_1]);
+        });
+        map.on("layerremove", function(){
+            resetLabels([layer_Route_1]);
+        });
+        </script>
+    </body>
+</html>
